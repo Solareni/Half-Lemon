@@ -1,3 +1,11 @@
 {
-    
+    "settings":{
+        "title":"设置",
+        "sidebar":{
+            "llmservice":"模型服务",
+            "defaultservice":"默认服务",
+            "aboutme":"关于我们",
+            "tools":"工具集"
+        }
+    }
 }

@@ -1,3 +1,11 @@
 {
-    
+    "settings":{
+        "title":"Settings",
+        "sidebar":{
+            "llmservice":"LLM Service",
+            "defaultservice":"Default Service",
+            "aboutme":"About Me",
+            "tools":"Tools"
+        }
+    }
 }

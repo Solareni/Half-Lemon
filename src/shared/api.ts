@@ -1,5 +1,3 @@
-import * as vscode from "vscode"
-
 export type ApiProvider =
 	| "anthropic"
 	| "glama"
@@ -21,7 +19,6 @@ export interface ApiHandlerOptions {
 	apiModelId?: string
 	apiKey?: string // anthropic
 	anthropicBaseUrl?: string
-	vsCodeLmModelSelector?: vscode.LanguageModelChatSelector
 	glamaModelId?: string
 	glamaModelInfo?: ModelInfo
 	glamaApiKey?: string
