@@ -30,23 +30,31 @@ const Sidebar = () => {
 				<Flex direction="column" justify="between" className="flex-1">
 					<Flex direction="column" gap="5">
 						<Link to="/chat">
-							<LuMessageCircleMore className="w-5 h-5 hover:rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800" />
+							<Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2"> 
+								<LuMessageCircleMore className="w-5 h-5" />
+							</Box>
 						</Link>
 
 						<Link to="/library">
-							<LuLibrary className="w-5 h-5 hover:rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800" />
+							<Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2"> 
+								<LuLibrary className="w-5 h-5" />
+							</Box>
 						</Link>
 					</Flex>
 
 					<Flex direction="column" gap="5">
-						<LuTheme
-							className="w-5 h-5 hover:rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800"
-							onClick={toggleTheme}
-						/>
-						<LuSettings
-							className="w-5 h-5 hover:rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800"
-							onClick={handleOpenSettings}
-						/>
+						<Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2"> 
+							<LuTheme
+								className="w-5 h-5"
+								onClick={toggleTheme}
+							/>
+						</Box>
+						<Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2"> 
+							<LuSettings
+								className="w-5 h-5"
+								onClick={handleOpenSettings}
+							/>
+						</Box>
 					</Flex>
 				</Flex>
 			</Flex>
@@ -56,7 +64,7 @@ const Sidebar = () => {
 function App() {
 	const { t } = useTranslation();
 	return (
-		<Flex direction="row">
+		<Flex direction="row" className="h-screen overflow-hidden">
 			<Sidebar />
 			<Box className="flex-1 rounded-tl-lg border border-gray-200 dark:border-gray-700">
 				<Outlet />
