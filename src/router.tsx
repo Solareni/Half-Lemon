@@ -13,15 +13,26 @@ import ToolsPage from "./settings/ToolsPage";
 import DefaultServicePage from "./settings/DefaultServicePage";
 import AboutMePage from "./settings/AboutMePage";
 import { useTranslation } from "react-i18next";
+import ChatDetailPage from "./app/ChatDetailPage";
 const ThemeApp = () => {
 	const { theme } = useAppStore();
-	return <Theme appearance={theme}> <App /> </Theme>;
+	return (
+		<Theme appearance={theme}>
+			{" "}
+			<App />{" "}
+		</Theme>
+	);
 };
 
 const ThemeSettings = () => {
 	const { theme } = useAppStore();
-	return <Theme appearance={theme}> <SettingsPage /> </Theme>;
-}
+	return (
+		<Theme appearance={theme}>
+			{" "}
+			<SettingsPage />{" "}
+		</Theme>
+	);
+};
 
 export const router = createBrowserRouter([
 	{
@@ -50,17 +61,28 @@ export const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <ThemeApp />,
-		children:[
-			{index: true, element: <ChatPage />},
+		children: [
+			{ index: true, element: <ChatPage /> },
 			{
 				path: "chat",
 				element: <ChatPage />,
+				children: [
+					{ index: true, element: <ChatDetailPage /> },
+					{
+						path: ":id?",
+						element: <ChatDetailPage />,
+					},
+					{
+						path: ":id",
+						element: <ChatDetailPage />,
+					},
+				],
 			},
 			{
 				path: "library",
 				element: <LibraryPage />,
-			}
-		]
+			},
+		],
 	},
 	{
 		path: "*",
@@ -75,7 +97,7 @@ export const router = createBrowserRouter([
 	},
 ]);
 
-export const openSettingsWindow = async (title:string) => {
+export const openSettingsWindow = async (title: string) => {
 	// 检查窗口是否已存在
 	const webview = await WebviewWindow.getByLabel("settings");
 

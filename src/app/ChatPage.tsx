@@ -9,7 +9,7 @@ import {
 import { Virtuoso } from "react-virtuoso";
 import items from "../mock";
 import { memo } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 // 定义聊天项的类型
 interface ChatItem {
 	title: string;
@@ -25,14 +25,16 @@ const TitleRow = memo(({ item }: { item: ChatItem }) => {
 			? LuAudioLines
 			: LuMessageCircleMore;
 	return (
-		<Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 px-0.5 py-1 my-2 mx-0.5 cursor-pointer">
-			<Flex direction="row" justify="start" align="center" gap="2">
-				<LuItemIcons className="w-4 h-4 text-blue-500 flex-shrink-0 block" />
-				<Text className="text-gray-500 dark:text-gray-400" truncate>
-					{item.title}
-				</Text>
-			</Flex>
-		</Box>
+		<NavLink to={`/chat/${item.id}`} key={item.id}>
+			<Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 px-0.5 py-1 my-2 mx-0.5 cursor-pointer">
+				<Flex direction="row" justify="start" align="center" gap="2">
+					<LuItemIcons className="w-4 h-4 text-blue-500 flex-shrink-0 block" />
+					<Text className="text-gray-500 dark:text-gray-400" truncate>
+						{item.title}
+					</Text>
+				</Flex>
+			</Box>
+		</NavLink>
 	);
 });
 const ChatPage = () => {
@@ -55,7 +57,9 @@ const ChatPage = () => {
 					/>
 				</ScrollArea>
 			</Flex>
-			<Box className="flex-1 rounded-tl-lg border border-gray-200 dark:border-gray-700"></Box>
+			<Box className="flex-1 rounded-tl-lg border border-gray-200 dark:border-gray-700 bg-amber-900">
+				<Outlet />
+			</Box>
 		</Flex>
 	);
 };
