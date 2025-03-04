@@ -1,7 +1,13 @@
-import { Avatar, Box, Flex, ScrollArea, Text, TextField } from "@radix-ui/themes";
+import {
+	Avatar,
+	Box,
+	Flex,
+	ScrollArea,
+	Text,
+	TextField,
+} from "@radix-ui/themes";
 import {
 	LuAudioLines,
-	LuCirclePlus,
 	LuImage,
 	LuMessageCircleMore,
 	LuMoon,
@@ -9,6 +15,10 @@ import {
 	LuSettings,
 	LuSun,
 } from "react-icons/lu";
+import {
+	BsLayoutTextSidebarReverse,
+	BsLayoutTextSidebar,
+} from "react-icons/bs";
 import { Virtuoso } from "react-virtuoso";
 import items from "./mock";
 import { memo } from "react";
@@ -44,10 +54,13 @@ const TitleRow = memo(({ item }: { item: ChatItem }) => {
 	);
 });
 const App = () => {
-	const { theme, toggleTheme } = useAppStore();
+	const { theme, toggleTheme, sidebarVisible, setSidebarVisible } =
+		useAppStore();
 	const { t } = useTranslation();
 	const LuTheme = theme === "light" ? LuSun : LuMoon;
-
+	const LuSidebar = sidebarVisible
+		? BsLayoutTextSidebar
+		: BsLayoutTextSidebarReverse;
 	const handleOpenSettings = () => {
 		openSettingsWindow(t("settings.title"));
 	};
@@ -59,7 +72,11 @@ const App = () => {
 			>
 				<Avatar fallback="A" size="3" variant="solid" radius="full" />
 
-				<TextField.Root placeholder="Search the docs…" className="mt-2">
+				<TextField.Root
+					placeholder="Search the docs…"
+					className="mt-2"
+					radius="full"
+				>
 					<TextField.Slot>
 						<LuSearch className="w-4 h-4" />
 					</TextField.Slot>
@@ -71,19 +88,27 @@ const App = () => {
 						itemContent={(_, item) => <TitleRow item={item} />}
 					/>
 				</ScrollArea>
-
-				<Flex direction="row" gap="5" justify="center" className="m-2 p-2">
+			</Flex>
+			<Flex
+				direction="column"
+				className="flex-1 rounded-tl-lg border border-gray-200 dark:border-gray-700"
+			>
+				<Flex direction="row" gap="5" justify="end" className="m-2 p-2">
+					<Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2">
+						<LuSettings className="w-5 h-5" onClick={handleOpenSettings} />
+					</Box>
 					<Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2">
 						<LuTheme className="w-5 h-5" onClick={toggleTheme} />
 					</Box>
 					<Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2">
-						<LuSettings className="w-5 h-5" onClick={handleOpenSettings} />
+						<LuSidebar
+							className="w-5 h-5"
+							onClick={() => setSidebarVisible(!sidebarVisible)}
+						/>
 					</Box>
 				</Flex>
-			</Flex>
-			<Box className="flex-1 rounded-tl-lg border border-gray-200 dark:border-gray-700">
 				<Outlet />
-			</Box>
+			</Flex>
 		</Flex>
 	);
 };
