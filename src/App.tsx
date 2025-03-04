@@ -43,9 +43,9 @@ const TitleRow = memo(({ item }: { item: ChatItem }) => {
   return (
     <NavLink to={`/chat/${item.id}`} key={item.id}>
       <Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 px-0.5 py-1 my-2 mx-0.5 cursor-pointer">
-        <Flex direction="row" justify="start" align="center" gap="2">
+        <Flex direction="row" justify="start" align="center" gap="1">
           <LuItemIcons className="w-4 h-4 text-blue-500 flex-shrink-0 block" />
-          <Text className="text-gray-500 dark:text-gray-400" truncate>
+          <Text size="1" className="text-gray-500 dark:text-gray-400" truncate>
             {item.title}
           </Text>
         </Flex>
@@ -66,18 +66,9 @@ const App = () => {
   };
   return (
     <Flex direction="row" className="h-screen overflow-hidden">
-      <Flex
-        direction="column"
-        className="py-2 m-2 h-full w-1/7"
-      >
+      <Flex direction="column" className="py-2 m-2 h-full w-1/5">
         <Flex direction="row" justify="between" align="center" gap="2">
           <Avatar fallback="A" size="3" variant="solid" radius="full" />
-          <Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2">
-            <BsLayoutTextSidebarReverse
-              className="w-5 h-5"
-              onClick={() => setSidebarVisible(!sidebarVisible)}
-            />
-          </Box>
         </Flex>
 
         <TextField.Root
@@ -90,31 +81,50 @@ const App = () => {
           </TextField.Slot>
         </TextField.Root>
 
-        <ScrollArea scrollbars="vertical" className="mt-2 mb-2 rounded-lg border border-gray-200 dark:border-gray-700">
+        <ScrollArea
+          scrollbars="vertical"
+          className="mt-2 mb-1 rounded-lg border border-gray-200 dark:border-gray-700"
+        >
           <Virtuoso
             data={items}
             itemContent={(_, item) => <TitleRow item={item} />}
           />
         </ScrollArea>
+        <Flex
+          direction="column"
+          justify="start"
+        //   className="mt-1 mb-2 rounded-lg border border-gray-200 dark:border-gray-700"
+        >
+          <Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 px-0.5 my-1 mx-0.5 cursor-pointer" onClick={toggleTheme}>
+            <Flex direction="row" justify="start" align="center" gap="1">
+              <LuTheme className="w-4 h-4 text-blue-500 flex-shrink-0 block" />
+              <Text
+                size="1"
+                className="text-gray-500 dark:text-gray-400"
+                truncate
+              >
+                主题
+              </Text>
+            </Flex>
+          </Box>
+          <Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 px-0.5 my-2 mx-0.5 cursor-pointer" onClick={handleOpenSettings}>
+            <Flex direction="row" justify="start" align="center" gap="1">
+              <LuSettings className="w-4 h-4 text-blue-500 flex-shrink-0 block" />
+              <Text
+                size="1"
+                className="text-gray-500 dark:text-gray-400"
+                truncate
+              >
+                设置
+              </Text>
+            </Flex>
+          </Box>
+        </Flex>
       </Flex>
       <Flex
         direction="column"
         className="flex-1 rounded-tl-lg border border-gray-200 dark:border-gray-700"
       >
-        <Flex direction="row" gap="5" justify="end" className="m-2 p-2">
-          <Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2">
-            <LuSettings className="w-5 h-5" onClick={handleOpenSettings} />
-          </Box>
-          <Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2">
-            <LuTheme className="w-5 h-5" onClick={toggleTheme} />
-          </Box>
-          <Box className="rounded-xl hover:bg-amber-200 hover:dark:bg-amber-800 p-2 -m-2">
-            <BsLayoutTextSidebar
-              className="w-5 h-5"
-              onClick={() => setSidebarVisible(!sidebarVisible)}
-            />
-          </Box>
-        </Flex>
         <Outlet />
       </Flex>
     </Flex>
