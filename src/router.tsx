@@ -18,8 +18,7 @@ const ThemeApp = () => {
 	const { theme } = useAppStore();
 	return (
 		<Theme appearance={theme}>
-			{" "}
-			<App />{" "}
+			<App />
 		</Theme>
 	);
 };
@@ -28,8 +27,7 @@ const ThemeSettings = () => {
 	const { theme } = useAppStore();
 	return (
 		<Theme appearance={theme}>
-			{" "}
-			<SettingsPage />{" "}
+			<SettingsPage />
 		</Theme>
 	);
 };

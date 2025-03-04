@@ -57,7 +57,7 @@ const ChatPage = () => {
 					/>
 				</ScrollArea>
 			</Flex>
-			<Box className="flex-1 rounded-tl-lg border border-gray-200 dark:border-gray-700 bg-amber-900">
+			<Box className="flex-1 rounded-tl-lg border border-gray-200 dark:border-gray-700">
 				<Outlet />
 			</Box>
 		</Flex>
