@@ -1,18 +1,15 @@
 import { Navigate } from "react-router-dom";
 
 import SettingsPage from "./Settings";
-import App from "./App";
 import { createBrowserRouter } from "react-router-dom";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import useAppStore from "./appStore";
 import { Theme } from "@radix-ui/themes";
-import ChatPage from "./app/ChatPage";
-import LibraryPage from "./app/LibraryPage";
+import App from "./App";
 import LLModelApiPage from "./settings/LLModelApiPage";
 import ToolsPage from "./settings/ToolsPage";
 import DefaultServicePage from "./settings/DefaultServicePage";
 import AboutMePage from "./settings/AboutMePage";
-import { useTranslation } from "react-i18next";
 import ChatDetailPage from "./app/ChatDetailPage";
 const ThemeApp = () => {
 	const { theme } = useAppStore();
@@ -60,25 +57,14 @@ export const router = createBrowserRouter([
 		path: "/",
 		element: <ThemeApp />,
 		children: [
-			{ index: true, element: <ChatPage /> },
+			{ index: true, element: <ChatDetailPage /> },
 			{
-				path: "chat",
-				element: <ChatPage />,
-				children: [
-					{ index: true, element: <ChatDetailPage /> },
-					{
-						path: ":id?",
-						element: <ChatDetailPage />,
-					},
-					{
-						path: ":id",
-						element: <ChatDetailPage />,
-					},
-				],
+				path: "chat/:id?",
+				element: <ChatDetailPage />,
 			},
 			{
-				path: "library",
-				element: <LibraryPage />,
+				path: "chat/:id",
+				element: <ChatDetailPage />,
 			},
 		],
 	},
